@@ -66,7 +66,7 @@ function format_time()
     return other_color + "[" +
            time_color + date.getFullYear() +
            other_color + "-" +
-           time_color + format(date.getMonth()) +
+           time_color + format(date.getMonth()+1) +
            other_color + "-" +
            time_color + format(date.getDate()) +
            other_color + "/" +

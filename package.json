@@ -1,6 +1,6 @@
 {
   "name": "@ntf/logger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Another console logger library",
   "files": ["dist"],
   "main": "./dist/cjs/index.js",

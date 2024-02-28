@@ -24,7 +24,7 @@ function format_time()
     return "%c" + "[" +
            "%c" + date.getFullYear() +
            "%c" + "-" +
-           "%c" + format(date.getMonth()) +
+           "%c" + format(date.getMonth()+1) +
            "%c" + "-" +
            "%c" + format(date.getDate()) +
            "%c" + "/" +
