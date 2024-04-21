@@ -26,7 +26,7 @@ pnpm install @ntf/logger
 
 ### Importing
 
-This library can be used in `CommonJS` and `ESMoudle` enviorments
+This library can be used in `CommonJS` and `ESModule` environments
 
 ```typescript
 const { ... } = require("@ntf/logger");
