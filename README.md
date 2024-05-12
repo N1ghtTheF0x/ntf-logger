@@ -60,6 +60,6 @@ class MyCoolAndAwesomeLogger extends Logger
 };
 ```
 
-### License stuff that nobody reads
+## License stuff that nobody reads
 
 Just like any [Open Source Project](https://github.com/N1ghtTheF0x/ntf-logger) this has a [License](./LICENSE), the MIT License
