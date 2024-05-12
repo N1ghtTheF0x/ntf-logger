@@ -11,7 +11,7 @@
     "build:cjs": "tsc --build tsconfig.cjs.json",
     "build:esm": "tsc --build tsconfig.esm.json",
     "build": "npm run build:cjs && npm run build:esm",
-    "fix-esm-imports": "ts-node fix-esm-imports.ts",
+    "fix-esm-imports": "node fix-esm-imports.mjs dist/esm",
     "postbuild:esm": "npm run fix-esm-imports",
     "prepublishOnly": "npm run build"
   },
