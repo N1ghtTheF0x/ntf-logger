@@ -21,6 +21,7 @@ function format_time()
 {
     const date = new Date()
     const format = (n: number) => String(n).padStart(2,"0")
+    const format_millie = (n: number) => String(n).padStart(3,"0")
     return "%c" + "[" +
            "%c" + date.getFullYear() +
            "%c" + "-" +
@@ -34,7 +35,7 @@ function format_time()
            "%c" + ":" +
            "%c" + format(date.getSeconds()) +
            "%c" + "." +
-           "%c" + format(date.getMilliseconds()) +
+           "%c" + format_millie(date.getMilliseconds()) +
            "%c" + "]"
 }
 

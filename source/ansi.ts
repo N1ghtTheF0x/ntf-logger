@@ -63,6 +63,7 @@ function format_time()
 {
     const date = new Date()
     const format = (n: number) => String(n).padStart(2,"0")
+    const format_millie = (n: number) => String(n).padStart(3,"0")
     return other_color + "[" +
            time_color + date.getFullYear() +
            other_color + "-" +
@@ -76,7 +77,7 @@ function format_time()
            other_color + ":" +
            time_color + format(date.getSeconds()) +
            other_color + "." +
-           time_color + format(date.getMilliseconds()) +
+           time_color + format_millie(date.getMilliseconds()) +
            other_color + "]" + escape_code(0)
 }
 
