@@ -6,6 +6,7 @@ import { ILogger } from "./types"
  */
 abstract class Logger implements ILogger
 {
+//#region Constructors
     /**
      * Create a `Logger` object with label `label`
      * @param label The name of the Logger
@@ -14,6 +15,8 @@ abstract class Logger implements ILogger
     {
 
     }
+//#endregion
+//#region Methods
     public abstract print<T extends Array<any>>(level: LoggerLevel, ...args: T): void
     /**
      * Same as `Logger.print("info",...args)`
@@ -55,6 +58,41 @@ abstract class Logger implements ILogger
     {
         this.print("trace",...args)
     }
+//#endregion
+//#region Symbols
+    public get [Symbol.toStringTag](): "Logger"
+    {
+        return "Logger"
+    }
+    public [Symbol.toPrimitive](hint: "string" | "number" | "default")
+    {
+        switch(hint)
+        {
+            default:
+            case "string":
+            case "default":
+                return this.toString()
+            case "number":
+                throw new TypeError("cannot convert logger to number, why the fuck do you want to do that?")
+        }
+    }
+    /**
+     * Returns a string representation of an object.
+     */
+    public toString(): `Logger<${string}>`
+    {
+        return `Logger<${this.label}>`
+    }
+    /**
+     * Convert the logger into a JSON object. This is used by `JSON.stringify`
+     */
+    public toJSON()
+    {
+        return {
+            label: this.label
+        }
+    }
+//#endregion
 }
 
 export default Logger

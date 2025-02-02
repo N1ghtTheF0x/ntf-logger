@@ -9,11 +9,10 @@ export type RGB = [number,number,number]
  */
 export function color_from_int(int: number): RGB
 {
-    const hex = int.toString(16)
-    const red = parseInt(hex.substring(0,2),16)
-    const green = parseInt(hex.substring(2,4),16)
-    const blue = parseInt(hex.substring(4,6),16)
-    return [red,green,blue]
+    const rgb: RGB = [0,0,0]
+    for(let i = 0;i < rgb.length;i++)
+        rgb[i] = Math.abs((int >> (i * 8)) & 0xff)
+    return rgb
 }
 
 /**

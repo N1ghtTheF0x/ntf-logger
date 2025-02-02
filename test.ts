@@ -1,10 +1,5 @@
-import { AnsiLogger } from "./source/ansi"
+import { createLogger } from "./dist/index.cjs"
 
-const logger = new AnsiLogger("Test")
+const logger = createLogger("ass")
 
-logger.info("balls")
-const err = new Error("fuck")
-Error.captureStackTrace(err)
-logger.error(err)
-logger.warn("maybe")
-logger.debug("todo")
+logger.info("ass")

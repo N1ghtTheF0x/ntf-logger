@@ -36,13 +36,23 @@ const { ... } = require("@ntf/logger");
 import { ... } from "@ntf/logger";
 ```
 
-### For NodeJS
+### Creating a logger
 
-For NodeJS there's `AnsiLogger` class which you can guess, uses escaped ansi code for colors in termnial/console/command prompt/whatever terminal name
+You can use `createLogger` to create a logger based on the runtime you are using (browser, server, etc.)
 
-### For Browser
+```typescript
+const logger = createLogger("MyLoggerName")
+```
 
-For Browser there's `CSSLogger` class which uses the cool feature of CSS styling, you can try `AnsiLogger` but on some browsers it looks weird (especially Chrome)
+But you can use the implementations directly if you want
+
+#### For servers
+
+For servers there's `AnsiLogger` class which you can guess, uses escaped ansi code for colors in termnial/console/command prompt/whatever terminal name
+
+#### For browsers
+
+For browsers there's `CSSLogger` class which uses the cool feature of CSS styling, you can try `AnsiLogger` but on some browsers it looks weird (especially Chrome)
 
 ### I want to make my own Logger
 

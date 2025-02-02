@@ -48,6 +48,9 @@ function format_prefix(level: LoggerLevel,label: string)
            "%c" + "]"
 }
 
+/**
+ * A logger implementation for browsers
+ */
 export class CSSLogger extends Logger
 {
     public print<T extends Array<any>>(level: LoggerLevel, ...args: T): void

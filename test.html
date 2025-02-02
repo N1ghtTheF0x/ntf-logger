@@ -2,8 +2,8 @@
 <html>
     <head>
         <script type="module">
-            import { CSSLogger } from "/dist/esm/css.js"
-            Object.defineProperty(window,"Logger",{value: CSSLogger})
+            import * as logger from "/dist/index.mjs"
+            Object.defineProperty(window,"Logger",{value: logger})
         </script>
     </head>
     <body>

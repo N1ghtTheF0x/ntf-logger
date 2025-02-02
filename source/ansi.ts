@@ -2,11 +2,19 @@ import { color_from_string } from "./color"
 import LoggerLevel, { LevelColorMap } from "./level"
 import Logger from "./logger"
 
+/**
+ * Create a escape code from `code`
+ * @param code The type of escape code
+ * @returns The escape code
+ */
 export function escape_code<Code extends number | string>(code: Code): `\x1b[${Code}m`
 {
     return `\x1b[${code}m`
 }
 
+/**
+ * The ansi escape colors used for terminals in the right order
+ */
 export enum AnsiColors
 {
     Black,
@@ -19,14 +27,24 @@ export enum AnsiColors
     White
 }
 
-export function escape_fg_code(code: AnsiColors)
+/**
+ * Create a foreground color escape code
+ * @param color The color to use
+ * @returns A colored foreground escape code
+ */
+export function escape_fg_code(color: AnsiColors)
 {
-    return escape_code(30 + code)
+    return escape_code(30 + color)
 }
 
-export function escape_bg_code(code: AnsiColors)
+/**
+ * Create a background color escape code
+ * @param color The color to use
+ * @returns A colored background escape code
+ */
+export function escape_bg_code(color: AnsiColors)
 {
-    return escape_code(40 + code)
+    return escape_code(40 + color)
 }
 
 export function escape_bfg_code(code: number)
@@ -90,6 +108,9 @@ function format_prefix(level: LoggerLevel,label: string)
            other_color + "]" + escape_code(0)
 }
 
+/**
+ * A logger implementation for server runtimes
+ */
 export class AnsiLogger extends Logger
 {
     public print<T extends Array<any>>(level: LoggerLevel, ...args: T): void
