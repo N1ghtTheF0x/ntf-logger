@@ -1,0 +1,7 @@
+{
+    "entry": ["./source/index.ts"],
+    "clean": true,
+    "dts": true,
+    "format": ["cjs","esm"],
+    "target": "esnext"
+}

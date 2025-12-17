@@ -3,13 +3,13 @@
   "version": "1.1.0",
   "description": "Another console logger library",
   "files": ["dist"],
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
     "module": "./dist/index.mjs",
-    "types": "./dist/index.d.cts",
+    "types": "./dist/index.d.ts",
     "exports": {
       "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
       },
       "import": {
         "types": "./dist/index.d.mts",
@@ -17,10 +17,13 @@
       }
     },
   "scripts": {
-    "pretest": "pnpm run build",
-    "test": "tsx --tsconfig tsconfig.test.json test.ts",
-    "build": "pkgroll --src source",
-    "prepublishOnly": "pnpm run build"
+    "pretest": "pnpm build",
+    "test": "tsx --tsconfig ./tests/nodejs/tsconfig.json ./tests/nodejs/test.cts",
+    "check": "tsc --noEmit",
+    "prebuild": "pnpm check",
+    "build": "pnpm build:prod --sourcemap",
+    "build:prod": "tsup",
+    "prepublishOnly": "pnpm build:prod"
   },
   "repository": {
     "type": "git",
@@ -36,9 +39,10 @@
   },
   "homepage": "https://github.com/N1ghtTheF0x/ntf-logger#readme",
   "devDependencies": {
-    "typescript": "latest",
-    "tsx": "latest",
+    "@types/node": "latest",
     "express": "latest",
-    "pkgroll": "latest"
+    "tsup": "latest",
+    "tsx": "latest",
+    "typescript": "latest"
   }
 }
