@@ -1,4 +1,4 @@
-import LoggerLevel from "./level"
+import { LoggerLevel } from "./level"
 
 /**
  * Type for creating method for each level name

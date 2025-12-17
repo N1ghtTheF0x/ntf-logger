@@ -1,51 +1,27 @@
-import { color_from_string } from "./color"
-import LoggerLevel, { LevelColorMap } from "./level"
-import Logger from "./logger"
+import { rgbFromString } from "./color"
+import { getConsole } from "./console"
+import { LevelColorMap, LoggerLevel } from "./level"
+import { Logger } from "./logger"
 
-export function css_color<Red extends number,Green extends number,Blue extends number>(red: Red, green: Green, blue: Blue): `color: rgb(${Red},${Green},${Blue})`
+/**
+ * Create a CSS rgb function
+ * @param red A number from 0 to 255
+ * @param green A number from 0 to 255
+ * @param blue A number from 0 to 255
+ */
+export function cssCreateRGB(red: number, green: number, blue: number): `color: rgb(${number},${number},${number})`
 {
-    return `color: rgb(${red},${green},${blue})`
+    return `color: rgb(${red & 0xff},${green & 0xff},${blue & 0xff})`
 }
 
-const time_color = css_color(0,170,0)
-const other_color = css_color(85,85,85)
+const time_color = cssCreateRGB(0,170,0)
+const other_color = cssCreateRGB(85,85,85)
 const level_colors: LevelColorMap<string> = {
-    info: css_color(0,170,170),
-    warn: css_color(170,85,0),
-    error: css_color(170,0,0),
-    debug: css_color(170,0,170),
-    trace: css_color(0,0,170)
-}
-
-function format_time()
-{
-    const date = new Date()
-    const format = (n: number) => String(n).padStart(2,"0")
-    const format_millie = (n: number) => String(n).padStart(3,"0")
-    return "%c" + "[" +
-           "%c" + date.getFullYear() +
-           "%c" + "-" +
-           "%c" + format(date.getMonth()+1) +
-           "%c" + "-" +
-           "%c" + format(date.getDate()) +
-           "%c" + "/" +
-           "%c" + format(date.getHours()) +
-           "%c" + ":" +
-           "%c" + format(date.getMinutes()) +
-           "%c" + ":" +
-           "%c" + format(date.getSeconds()) +
-           "%c" + "." +
-           "%c" + format_millie(date.getMilliseconds()) +
-           "%c" + "]"
-}
-
-function format_prefix(level: LoggerLevel,label: string)
-{
-    return "[" +
-           "%c" + level.toUpperCase() +
-           "%c" + "/" +
-           "%c" + label +
-           "%c" + "]"
+    info: cssCreateRGB(0,170,170),
+    warn: cssCreateRGB(170,85,0),
+    error: cssCreateRGB(170,0,0),
+    debug: cssCreateRGB(170,0,170),
+    trace: cssCreateRGB(0,0,170)
 }
 
 /**
@@ -55,9 +31,9 @@ export class CSSLogger extends Logger
 {
     public print<T extends Array<any>>(level: LoggerLevel, ...args: T): void
     {
-        const log = console[level]
+        const log = getConsole()[level]
         log(
-            `${format_time()} ${format_prefix(level,this.label)}`,
+            `${CSSLogger.formatTime()} ${CSSLogger.formatPrefix(level,this.label)}`,
             other_color, // [
             time_color, // year
             other_color, // -
@@ -75,9 +51,50 @@ export class CSSLogger extends Logger
             other_color, // ] [
             level_colors[level], // level
             other_color, // /
-            css_color(...color_from_string(this.label)), // label
+            cssCreateRGB(...rgbFromString(this.label)), // label
             other_color, // ]
             ...args
         )
+    }
+}
+
+export namespace CSSLogger
+{
+    /**
+     * Format the time section using CSS
+     */
+    export function formatTime(): string
+    {
+        const date = new Date()
+        const format = (n: number) => String(n).padStart(2,"0")
+        const format_millie = (n: number) => String(n).padStart(3,"0")
+        return "%c" + "[" +
+            "%c" + date.getFullYear() +
+            "%c" + "-" +
+            "%c" + format(date.getMonth()+1) +
+            "%c" + "-" +
+            "%c" + format(date.getDate()) +
+            "%c" + "/" +
+            "%c" + format(date.getHours()) +
+            "%c" + ":" +
+            "%c" + format(date.getMinutes()) +
+            "%c" + ":" +
+            "%c" + format(date.getSeconds()) +
+            "%c" + "." +
+            "%c" + format_millie(date.getMilliseconds()) +
+            "%c" + "]"
+    }
+    /**
+     * Format the prefix section using CSS
+     * @param level The log level
+     * @param label A label
+     */
+    export function formatPrefix(level: LoggerLevel,label: string): string
+    {
+        return "[" +
+           "%c" + level.toUpperCase() +
+           "%c" + "/" +
+           "%c" + label +
+           "%c" + "]"
     }
 }

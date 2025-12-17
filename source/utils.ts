@@ -1,6 +1,6 @@
 import { AnsiLogger } from "./ansi"
 import { CSSLogger } from "./css"
-import type Logger from "./logger"
+import type { Logger } from "./logger"
 
 /**
  * Create a logger instance by using the correct runtime implementation

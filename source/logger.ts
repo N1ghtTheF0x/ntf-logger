@@ -1,10 +1,10 @@
-import LoggerLevel from "./level"
+import { LoggerLevel } from "./level"
 import { ILogger } from "./types"
 
 /**
  * Abstract class that only needs `print` to be implemented
  */
-abstract class Logger implements ILogger
+export abstract class Logger implements ILogger
 {
 //#region Constructors
     /**
@@ -73,7 +73,7 @@ abstract class Logger implements ILogger
             case "default":
                 return this.toString()
             case "number":
-                throw new TypeError("cannot convert logger to number, why the fuck do you want to do that?")
+                throw new TypeError("cannot convert logger to number")
         }
     }
     /**
@@ -94,5 +94,3 @@ abstract class Logger implements ILogger
     }
 //#endregion
 }
-
-export default Logger

@@ -1,8 +1,8 @@
 /**
  * Create a hash from a string ({@link https://gist.github.com/0x263b/2bdd90886c2036a1ad5bcf06d6e6fb37 origin})
- * @param string string to get hashed
+ * @param string A string
  */
-export function hashCode(string: string)
+export function hashCode(string: string): number
 {
     let h = 0
     if(string.length === 0) return 0

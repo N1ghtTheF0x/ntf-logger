@@ -1,5 +1,6 @@
 export * from "./ansi"
 export * from "./color"
+export * from "./console"
 export * from "./css"
 export * from "./level"
 export * from "./logger"
